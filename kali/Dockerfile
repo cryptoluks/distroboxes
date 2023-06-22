@@ -46,12 +46,6 @@ RUN apt-get update \
 RUN apt-get -y install curl \
     && curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
 
-# Install Burp Pro
-RUN apt-get update \
-    && apt-get -y install wget \
-    && wget 'https://portswigger-cdn.net/burp/releases/download?product=pro&type=Linux' -O /tmp/burp.sh \
-    && sh /tmp/burp.sh -q
-
 # Jailbreak tools
 RUN apt-get update \
     && apt-get -y install wget gnupg \
