@@ -127,7 +127,8 @@ RUN apt-get update \
     libusbmuxd-tools \
     pipenv \
     python3-poetry \
-    libplist-utils
+    libplist-utils \
+    gitleaks
 
 # Cleanup
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
