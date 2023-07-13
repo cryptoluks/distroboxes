@@ -4,9 +4,9 @@ FROM quay.io/fedora/fedora:38
 RUN dnf install -y langpacks-de
 
 # shell deps
-RUN dnf install -y curl \
-    && curl -sS https://starship.rs/install.sh | sh -s -- -y \
-    && dnf install -y \
+RUN dnf install -y curl && \
+    curl -sS https://starship.rs/install.sh | sh -s -- -y && \
+    dnf install -y \
     bat \
     exa \
     fd-find \
