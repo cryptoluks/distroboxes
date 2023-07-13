@@ -64,6 +64,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
 RUN apt-get install -y ruby ruby-dev && \
     gem install bundler-audit
 
+# Copy dependency-check wrapper
+COPY dependency-check /usr/local/bin/dependency-check
+
 # Install OWASP dependency-check
 RUN apt-get update && \
     apt-get -y install wget curl && \
@@ -71,7 +74,7 @@ RUN apt-get update && \
     wget "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" -O /tmp/dependency-check.zip && \
     unzip /tmp/dependency-check.zip -d /usr/share/ && \
     rm /tmp/dependency-check.zip && \
-    ln -s /usr/share/dependency-check/bin/dependency-check.sh /usr/local/bin/dependency-check
+    chmod +x /usr/local/bin/dependency-check
 
 # Install jwt_tool
 RUN apt-get update && \
