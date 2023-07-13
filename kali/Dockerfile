@@ -70,7 +70,7 @@ RUN apt-get update && \
     VERSION=$(curl -s https://jeremylong.github.io/DependencyCheck/current.txt) && \
     wget "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" -O /tmp/dependency-check.zip && \
     unzip /tmp/dependency-check.zip -d /usr/share/ && \
-    /tmp/dependency-check.zip && \
+    rm /tmp/dependency-check.zip && \
     ln -s /usr/share/dependency-check/bin/dependency-check.sh /usr/local/bin/dependency-check
 
 # Install jwt_tool
