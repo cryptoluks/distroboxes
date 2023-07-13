@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# Check if a directory is provided
+if [ $# -eq 0 ]
+then
+    echo "No directory supplied. Please provide the directory to be scanned."
+    exit 1
+fi
+
+# Set the scan directory from the first parameter
+SCAN_DIR=$1
+
+# Get the name of the scanned directory to use it in the output directory and project name
+DIR_NAME=$(basename "$SCAN_DIR")
+
+# Set the data and cache directories
+DC_DIRECTORY="$HOME/.dependency-check"
+DATA_DIRECTORY="$DC_DIRECTORY/data"
+CACHE_DIRECTORY="$DATA_DIRECTORY/cache"
+
+# Set the project name
+DC_PROJECT="dependency-check scan: $DIR_NAME"
+
+# Set the output directory
+OUT_DIR="${DIR_NAME}_dependency-check"
+
+# Create the data and cache directories if they do not exist
+mkdir -p "$DATA_DIRECTORY"
+mkdir -p "$CACHE_DIRECTORY"
+
+# Create the output directory if it does not exist
+mkdir -p "$OUT_DIR"
+
+# Run the dependency check
+/usr/share/dependency-check/bin/dependency-check.sh --data "$DATA_DIRECTORY" --scan "$SCAN_DIR" --format "ALL" --project "$DC_PROJECT" --out "$OUT_DIR"
+
+echo "Dependency check completed. Report can be found in $OUT_DIR."
