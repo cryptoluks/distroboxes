@@ -18,7 +18,7 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get -y install curl && \
     curl -sS https://starship.rs/install.sh | sh -s -- -y && \
-    apt-get -y install bat exa fd-find fish fzf nano neovim ripgrep tmux zoxide zsh
+    apt-get -y install bat exa fd-find fish fzf nano neovim ripgrep tmux zoxide zsh thefuck direnv
 
 # Install pipx packages
 RUN apt-get update && \
