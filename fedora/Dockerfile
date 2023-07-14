@@ -8,6 +8,7 @@ RUN dnf install -y curl && \
     curl -sS https://starship.rs/install.sh | sh -s -- -y && \
     dnf install -y \
     bat \
+    direnv \
     exa \
     fd-find \
     fish \
@@ -15,6 +16,7 @@ RUN dnf install -y curl && \
     nano \
     neovim \
     ripgrep \
+    thefuck \
     tmux \
     zoxide \
     zsh
