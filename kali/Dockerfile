@@ -64,6 +64,7 @@ RUN <<-EOF
     pipx install mobsfscan
     pipx install objection
     pipx install semgrep
+    pipx install jupyterlab
     rm -r /var/lib/apt/lists/*
 EOF
 
