@@ -155,6 +155,15 @@ RUN <<-EOF
     ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
 EOF
 
+# Install httpie
+RUN <<-EOF
+    curl -sSL https://packages.httpie.io/deb/KEY.gpg | gpg --dearmor -o /usr/share/keyrings/httpie.gpg
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/httpie.gpg] https://packages.httpie.io/deb ./" > /etc/apt/sources.list.d/httpie.list
+    apt-get update
+    apt-get install httpie
+    rm -r /var/lib/apt/lists/*
+EOF
+
 # Other tools provided by kali repos
 RUN <<-EOF
     apt-get update
