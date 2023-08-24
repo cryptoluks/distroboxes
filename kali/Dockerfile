@@ -65,6 +65,7 @@ RUN <<-EOF
     pipx install objection
     pipx install semgrep
     pipx install jupyterlab
+    pipx install http-prompt
     rm -r /var/lib/apt/lists/*
 EOF
 
