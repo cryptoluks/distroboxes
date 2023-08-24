@@ -155,9 +155,25 @@ RUN <<-EOF
     ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
 EOF
 
+# Other tools provided by kali repos
 RUN <<-EOF
     apt-get update
-    apt-get install kali-tools-sniffing-spoofing bettercap-ui testssl.sh ssh-audit android-tools-adb ideviceinstaller iputils-ping libimobiledevice-utils libusbmuxd-tools pipenv python3-poetry libplist-utils gitleaks
+    apt-get install \
+        android-tools-adb \
+        bettercap-ui \
+        gitleaks \
+        ideviceinstaller \
+        iputils-ping \
+        kali-tools-sniffing-spoofing \
+        libimobiledevice-utils \
+        libplist-utils \
+        libusbmuxd-tools \
+        nuclei \
+        pipenv \
+        python3-poetry \
+        seclists \
+        ssh-audit \
+        testssl.sh
     rm -r /var/lib/apt/lists/*
 EOF
 
