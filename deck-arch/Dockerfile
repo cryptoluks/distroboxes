@@ -28,6 +28,7 @@ RUN <<-EOF
     vte-common \
     vulkan-intel \
     vulkan-radeon \
-    wget
+    wget \
+    zarchive
   yes | LC_ALL=en_US.UTF-8 pacman -Scc
 EOF
