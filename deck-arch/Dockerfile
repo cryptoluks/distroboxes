@@ -29,6 +29,8 @@ RUN <<-EOF
     vulkan-intel \
     vulkan-radeon \
     wget \
-    zarchive
+    zarchive \
+    fish \
+    ripgrep
   yes | LC_ALL=en_US.UTF-8 pacman -Scc
 EOF
