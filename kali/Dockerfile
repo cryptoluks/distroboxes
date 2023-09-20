@@ -89,7 +89,7 @@ EOF
 # Distrobox init dependencies
 RUN <<-EOF
     apt-get update
-    apt-get install apt-utils bash bc curl dialog diffutils findutils fish gnupg2 less libgl1-mesa-glx libnss-myhostname libvte-2.9[0-9]-common libvte-common lsof ncurses-base passwd pinentry-curses procps sudo time util-linux wget zsh
+    apt-get install apt-utils bash bc curl dialog diffutils findutils fish gnupg2 less libnss-myhostname libvte-2.9[0-9]-common libvte-common lsof ncurses-base passwd pinentry-curses procps sudo time util-linux wget zsh
     rm -r /var/lib/apt/lists/*
 EOF
 
