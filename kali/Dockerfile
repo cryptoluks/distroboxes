@@ -74,6 +74,7 @@ RUN <<-EOF
     pipx install semgrep
     pipx install jupyterlab
     pipx install http-prompt
+    pipx install detect-secrets
     rm -r /var/lib/apt/lists/*
 EOF
 
