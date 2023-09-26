@@ -75,6 +75,7 @@ RUN <<-EOF
     pipx install jupyterlab
     pipx install http-prompt
     pipx install detect-secrets
+    pipx install flawfinder
     rm -r /var/lib/apt/lists/*
 EOF
 
