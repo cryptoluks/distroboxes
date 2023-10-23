@@ -14,16 +14,25 @@ RUN <<-EOF
     echo "APT::Get::Assume-Yes true;" > /etc/apt/apt.conf.d/90assumeyes
     apt-get update
     apt-get dist-upgrade
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install kubectl
 RUN <<-EOF
+    apt-get update
+    apt-get install gnupg curl
     curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
     echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list
     apt-get update
     apt-get install kubectl
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
+EOF
+
+# Install steampipe with plugins
+RUN <<-EOF
+    /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/turbot/steampipe/main/install.sh)"
+    steampipe plugin install net
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install pet and tldr
@@ -31,7 +40,7 @@ RUN <<-EOF
     apt-get update
     apt-get install jq tldr
     curl -s https://api.github.com/repos/knqyf263/pet/releases/latest | jq -r '.assets[] | select(.name | test("linux_amd64.tar.gz")) | .browser_download_url' | xargs -I {} curl -sS -L {} | tar xz -O pet > /tmp/pet && mv /tmp/pet /usr/local/bin/ && chmod +x /usr/local/bin/pet
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install beanshooter
@@ -51,7 +60,7 @@ EOF
 RUN <<-EOF
     apt-get update
     apt-get install kali-linux-headless
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install checkra1n
@@ -59,7 +68,7 @@ RUN <<-EOF
     apt-get update
     apt-get install curl
     curl -sS https://checkra.in/releases/ | grep -o 'https://assets.checkra.in/downloads/linux/cli/x86_64/[^"]*' | xargs curl -o /usr/local/bin/checkra1n && chmod +x /usr/local/bin/checkra1n
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Shell dependencies
@@ -68,7 +77,7 @@ RUN <<-EOF
     apt-get install curl
     curl -sS "https://starship.rs/install.sh" | sh -s -- -y
     apt-get install bat exa fd-find fish fzf nano neovim ripgrep tmux zoxide zsh thefuck direnv
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install pipx packages
@@ -85,7 +94,7 @@ RUN <<-EOF
     pipx install http-prompt
     pipx install detect-secrets
     pipx install flawfinder
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install Trivy
@@ -93,14 +102,14 @@ RUN <<-EOF
     apt-get update
     apt-get install curl
     curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Distrobox init dependencies
 RUN <<-EOF
     apt-get update
     apt-get install apt-utils bash bc curl dialog diffutils findutils fish gnupg2 less libnss-myhostname libvte-2.9[0-9]-common libvte-common lsof ncurses-base passwd pinentry-curses procps sudo time util-linux wget zsh
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install .NET 6 SDK
@@ -109,14 +118,14 @@ RUN <<-EOF
     dpkg -i packages-microsoft-prod.deb
     apt-get update
     apt-get install dotnet-sdk-6.0
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install Go
 RUN <<-EOF
     apt-get update
     apt-get install golang
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install Node.js, npm, yarn and pnpm
@@ -125,7 +134,7 @@ RUN <<-EOF
     apt-get update
     apt-get install nodejs
     npm install -g yarn pnpm
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install Ruby and bundle-audit
@@ -133,7 +142,7 @@ RUN <<-EOF
     apt-get update
     apt-get install ruby ruby-dev
     gem install bundler-audit
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Copy dependency-check wrapper
@@ -148,7 +157,7 @@ RUN <<-EOF
     unzip /tmp/dependency-check.zip -d /usr/share/
     rm /tmp/dependency-check.zip
     chmod +x /usr/local/bin/dependency-check
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install jwt_tool
@@ -161,7 +170,7 @@ RUN <<-EOF
     mv /usr/share/jwt_tool-master /usr/share/jwt_tool
     chmod +x /usr/share/jwt_tool/jwt_tool.py
     ln -s /usr/share/jwt_tool/jwt_tool.py /usr/local/bin/jwt_tool
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install dotnet-sonarscanner and sonar-scanner-cli
@@ -181,7 +190,7 @@ RUN <<-EOF
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/httpie.gpg] https://packages.httpie.io/deb ./" > /etc/apt/sources.list.d/httpie.list
     apt-get update
     apt-get install httpie
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 # Other tools provided by kali repos
@@ -203,7 +212,7 @@ RUN <<-EOF
         seclists \
         ssh-audit \
         testssl.sh
-    rm -r /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 EOF
 
 SHELL ["/bin/sh", "-c"]
