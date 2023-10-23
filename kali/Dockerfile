@@ -28,10 +28,9 @@ RUN <<-EOF
     rm -rf /var/lib/apt/lists/*
 EOF
 
-# Install steampipe with plugins
+# Install steampipe
 RUN <<-EOF
     /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/turbot/steampipe/main/install.sh)"
-    steampipe plugin install net
     rm -rf /var/lib/apt/lists/*
 EOF
 
