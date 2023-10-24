@@ -30,7 +30,11 @@ EOF
 
 # Install steampipe
 RUN <<-EOF
+    apt-get update
+    apt-get install curl git
     /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/turbot/steampipe/main/install.sh)"
+    git clone --depth 1 https://github.com/turbot/steampipe-mod-aws-compliance /usr/local/share/steampipe-mod-aws-compliance
+    git clone --depth 1 https://github.com/turbot/steampipe-mod-terraform-aws-compliance /usr/local/share/steampipe-mod-terraform-aws-compliance
     rm -rf /var/lib/apt/lists/*
 EOF
 
