@@ -83,7 +83,6 @@ EOF
 RUN <<-EOF
     apt-get update
     apt-get install pipx
-    pipx install awscli
     pipx install azure-cli
     pipx install frida-tools
     pipx install mobsfscan
@@ -197,6 +196,7 @@ RUN <<-EOF
     apt-get update
     apt-get install \
         android-tools-adb \
+        awscli \
         bettercap-ui \
         gitleaks \
         ideviceinstaller \
