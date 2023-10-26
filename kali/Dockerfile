@@ -218,6 +218,16 @@ RUN <<-EOF
     rm -rf /var/lib/apt/lists/*
 EOF
 
+# Install git-secret
+RUN <<-EOF
+    apt-get update
+    apt-get install wget
+    echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list
+    wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | apt-key add -
+    apt-get update
+    apt-get install git-secret
+EOF
+
 SHELL ["/bin/sh", "-c"]
 
 ENV STEAMPIPE_UPDATE_CHECK=false
