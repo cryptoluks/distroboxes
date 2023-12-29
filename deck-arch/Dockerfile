@@ -1,5 +1,10 @@
 FROM quay.io/toolbx-images/archlinux-toolbox
 
+SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
+
+ENV PIPX_HOME=/opt/pipx
+ENV PIPX_BIN_DIR=/usr/local/bin
+
 RUN <<-EOF
   pacman -Syu --noconfirm --needed \
     base-devel \
@@ -32,5 +37,12 @@ RUN <<-EOF
     zarchive \
     fish \
     ripgrep
-  yes | LC_ALL=en_US.UTF-8 pacman -Scc
 EOF
+
+RUN <<-EOF
+  pacman -Scc
+  rm -rf /tmp/*
+  rm -rf /var/tmp/*
+EOF
+
+SHELL ["/bin/sh", "-c"]
