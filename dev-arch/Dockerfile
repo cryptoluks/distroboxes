@@ -27,7 +27,6 @@ RUN <<-EOF
     starship \
     terraform \
     thefuck \
-    util-linux-libs \
     vagrant \
     vulkan-intel \
     vulkan-radeon \
