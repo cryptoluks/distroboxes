@@ -24,7 +24,6 @@ RUN <<-EOF
     packer \
     python \
     python-pip \
-    shadow \
     starship \
     terraform \
     thefuck \
