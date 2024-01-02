@@ -17,6 +17,7 @@ RUN <<-EOF
     dnsutils \
     eza \
     fish \
+    fisher \
     gdb \
     gnu-netcat \
     htop \
