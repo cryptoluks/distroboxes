@@ -21,6 +21,7 @@ RUN <<-EOF
     fish \
     fisher \
     gdb \
+    git \
     gnu-netcat \
     htop \
     inetutils \
