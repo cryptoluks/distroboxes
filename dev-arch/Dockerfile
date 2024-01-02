@@ -6,6 +6,7 @@ ENV PIPX_HOME=/opt/pipx
 ENV PIPX_BIN_DIR=/usr/local/bin
 
 RUN <<-EOF
+  pacman -Syu --noconfirm archlinux-keyring
   pacman -Syu --noconfirm --needed \
     bat \
     bc \
