@@ -7,12 +7,14 @@ ENV PIPX_BIN_DIR=/usr/local/bin
 
 RUN <<-EOF
   pacman -Syu --noconfirm --needed \
+    bash-completion \
     bat \
     bc \
     caddy \
     chezmoi \
     clang \
     cmake \
+    diffutils \
     direnv \
     dnsutils \
     eza \
@@ -24,23 +26,43 @@ RUN <<-EOF
     inetutils \
     jdk-openjdk \
     jq \
+    less \
+    lsof \
+    man-db \
+    man-pages \
     mesa \
+    mlocate \
+    mtr \
     nano \
     nmap \
+    nss-mdns \
     opengl-driver \
+    openssh \
     packer \
+    pigz \
     python \
     python-pip \
     rust \
     smartmontools \
     starship \
+    sudo \
+    tcpdump \
     terraform \
     thefuck \
+    time \
     tmux \
+    traceroute \
+    tree \
+    unzip \
     usbutils \
     vagrant \
+    vte-common \
     vulkan-intel \
     vulkan-radeon \
+    wget \
+    words \
+    xorg-xauth \
+    zip \
     zoxide
 EOF
 
