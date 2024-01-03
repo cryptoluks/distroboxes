@@ -4,7 +4,7 @@ on:
     - cron:  '0 3 * * 6'
   push:
     paths:
-      - kasm-d/**
+      - dev-kasm/**
 
 env:
   REGISTRY: ghcr.io
