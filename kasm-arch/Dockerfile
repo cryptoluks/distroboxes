@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/docker-webtop:arch-mate
+FROM lscr.io/linuxserver/webtop:arch-mate
 
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
