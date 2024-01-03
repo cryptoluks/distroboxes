@@ -1,5 +1,7 @@
 FROM docker.io/kasmweb/kali-rolling-desktop:x86_64-1.14.0-rolling
 
+USER root
+
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
 ENV PIPX_HOME=/opt/pipx
@@ -35,3 +37,5 @@ RUN <<-EOF
 EOF
 
 SHELL ["/bin/sh", "-c"]
+
+USER kasm-user
