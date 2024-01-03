@@ -10,8 +10,6 @@ ENV PIPX_BIN_DIR=/usr/local/bin
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN <<-EOF
-    whoami
-    mkdir -p /etc/apt/apt.conf.d
     echo "APT::Get::Assume-Yes true;" > /etc/apt/apt.conf.d/90assumeyes
 EOF
 
