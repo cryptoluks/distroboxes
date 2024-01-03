@@ -8,14 +8,14 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  DST: ghcr.io/${{ github.repository }}/kasm-arch:latest
+  DST: ghcr.io/${{ github.repository }}/dev-kasm:latest
   
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  kasm-arch:
+  dev-kasm:
     runs-on: ubuntu-latest
     steps:
     - name: Login to ${{ env.REGISTRY }} as ${{ github.actor }}
@@ -31,7 +31,7 @@ jobs:
     - name: Build and push the image to ${{ env.DST }}
       uses: docker/build-push-action@v4
       with:
-        context: kasm-arch
+        context: dev-kasm
         push: true
         tags: ${{ env.DST }}
         platforms: linux/amd64
