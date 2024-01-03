@@ -1,4 +1,4 @@
-FROM docker.io/kasmweb/kali-rolling-desktop:1.14.0
+FROM docker.io/kasmweb/kali-rolling-desktop:x86_64-1.14.0-rolling
 
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
