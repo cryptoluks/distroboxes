@@ -28,6 +28,7 @@ RUN <<-EOF
     jdk-openjdk \
     jq \
     less \
+    libvirt \
     lsof \
     man-db \
     man-pages \
