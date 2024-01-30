@@ -30,7 +30,6 @@ EOF
 # Install kubectl
 RUN <<-EOF
     apt-get update
-
     curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
     echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list
     apt-get update
@@ -41,9 +40,11 @@ EOF
 # Install steampipe
 RUN <<-EOF
     apt-get update
-    /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/turbot/steampipe/main/install.sh)"
-    git clone https://github.com/turbot/steampipe-mod-aws-compliance /usr/local/share/steampipe-mod-aws-compliance && chown -R 1000:1000 /usr/local/share/steampipe-mod-aws-compliance
-    git clone https://github.com/turbot/steampipe-mod-terraform-aws-compliance /usr/local/share/steampipe-mod-terraform-aws-compliance && chown -R 1000:1000 /usr/local/share/steampipe-mod-terraform-aws-compliance
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/turbot/steampipe/main/install.sh)"
+    git clone https://github.com/turbot/steampipe-mod-aws-compliance /usr/local/share/steampipe-mod-aws-compliance
+    git clone https://github.com/turbot/steampipe-mod-terraform-aws-compliance /usr/local/share/steampipe-mod-terraform-aws-compliance
+    git clone https://github.com/turbot/steampipe-mod-gcp-compliance /usr/local/share/steampipe-mod-gcp-compliance
+    chown -R 1000:1000 /usr/local/share/steampipe-mod-*
     rm -rf /var/lib/apt/lists/*
 EOF
 
