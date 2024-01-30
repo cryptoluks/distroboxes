@@ -14,13 +14,23 @@ RUN <<-EOF
     echo "APT::Get::Assume-Yes true;" > /etc/apt/apt.conf.d/90assumeyes
     apt-get update
     apt-get dist-upgrade
+    apt-get install gnupg curl wget git
+    rm -rf /var/lib/apt/lists/*
+EOF
+
+# Install google-cloud-cli
+RUN <<-EOF
+    curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+    echo 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main' | tee /etc/apt/sources.list.d/google-cloud-sdk.list
+    apt-get update
+    apt-get install google-cloud-cli
     rm -rf /var/lib/apt/lists/*
 EOF
 
 # Install kubectl
 RUN <<-EOF
     apt-get update
-    apt-get install gnupg curl
+
     curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
     echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list
     apt-get update
@@ -31,7 +41,6 @@ EOF
 # Install steampipe
 RUN <<-EOF
     apt-get update
-    apt-get install curl git
     /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/turbot/steampipe/main/install.sh)"
     git clone https://github.com/turbot/steampipe-mod-aws-compliance /usr/local/share/steampipe-mod-aws-compliance && chown -R 1000:1000 /usr/local/share/steampipe-mod-aws-compliance
     git clone https://github.com/turbot/steampipe-mod-terraform-aws-compliance /usr/local/share/steampipe-mod-terraform-aws-compliance && chown -R 1000:1000 /usr/local/share/steampipe-mod-terraform-aws-compliance
@@ -69,7 +78,6 @@ EOF
 # Install checkra1n
 RUN <<-EOF
     apt-get update
-    apt-get install curl
     curl -sS https://checkra.in/releases/ | grep -o 'https://assets.checkra.in/downloads/linux/cli/x86_64/[^"]*' | xargs curl -o /usr/local/bin/checkra1n && chmod +x /usr/local/bin/checkra1n
     rm -rf /var/lib/apt/lists/*
 EOF
@@ -77,7 +85,6 @@ EOF
 # Shell dependencies
 RUN <<-EOF
     apt-get update
-    apt-get install curl
     curl -sS "https://starship.rs/install.sh" | sh -s -- -y
     apt-get install bat exa fd-find fish fzf nano neovim ripgrep tmux zoxide zsh thefuck direnv
     rm -rf /var/lib/apt/lists/*
@@ -102,7 +109,6 @@ EOF
 # Install Trivy
 RUN <<-EOF
     apt-get update
-    apt-get install curl
     curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
     rm -rf /var/lib/apt/lists/*
 EOF
@@ -153,7 +159,6 @@ COPY dependency-check /usr/local/bin/dependency-check
 # Install OWASP dependency-check
 RUN <<-EOF
     apt-get update
-    apt-get install wget curl
     VERSION=$(curl -s https://jeremylong.github.io/DependencyCheck/current.txt)
     wget "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" -O /tmp/dependency-check.zip
     unzip /tmp/dependency-check.zip -d /usr/share/
@@ -165,7 +170,6 @@ EOF
 # Install jwt_tool
 RUN <<-EOF
     apt-get update
-    apt-get install wget
     wget https://github.com/ticarpi/jwt_tool/archive/refs/heads/master.zip -O /tmp/jwt_tool.zip
     unzip /tmp/jwt_tool.zip -d /usr/share/
     rm /tmp/jwt_tool.zip
@@ -221,7 +225,6 @@ EOF
 # Install git-secret
 RUN <<-EOF
     apt-get update
-    apt-get install wget
     echo 'deb https://gitsecret.jfrog.io/artifactory/git-secret-deb git-secret main' >> /etc/apt/sources.list
     wget -qO - 'https://gitsecret.jfrog.io/artifactory/api/gpg/key/public' | apt-key add -
     apt-get update
