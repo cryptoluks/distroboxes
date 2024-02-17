@@ -1,6 +1,4 @@
-ARG SRC
-
-FROM "$SRC"
+FROM docker.io/kalilinux/kali-last-release:latest
 
 SHELL ["/bin/bash", "-euxo", "pipefail", "-c"]
 
