@@ -13,6 +13,7 @@ RUN <<-EOF
     curl \
     diffutils \
     findutils \
+    fish \
     glibc \
     gnupg \
     less \
@@ -35,7 +36,6 @@ RUN <<-EOF
     vulkan-radeon \
     wget \
     zarchive \
-    fish \
     ripgrep
 EOF
 

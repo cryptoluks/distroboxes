@@ -152,9 +152,6 @@ RUN <<-EOF
     rm -rf /var/lib/apt/lists/*
 EOF
 
-# Copy dependency-check wrapper
-COPY dependency-check /usr/local/bin/dependency-check
-
 # Install OWASP dependency-check
 RUN <<-EOF
     apt-get update
@@ -234,4 +231,3 @@ SHELL ["/bin/sh", "-c"]
 
 ENV STEAMPIPE_UPDATE_CHECK=false
 ENV STEAMPIPE_TELEMETRY=none
-
