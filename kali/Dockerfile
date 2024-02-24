@@ -159,7 +159,6 @@ RUN <<-EOF
     wget "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" -O /tmp/dependency-check.zip
     unzip /tmp/dependency-check.zip -d /usr/share/
     rm /tmp/dependency-check.zip
-    chmod +x /usr/local/bin/dependency-check
     rm -rf /var/lib/apt/lists/*
 EOF
 
