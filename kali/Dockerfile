@@ -85,7 +85,7 @@ EOF
 RUN <<-EOF
     apt-get update
     curl -sS "https://starship.rs/install.sh" | sh -s -- -y
-    apt-get install bat exa fd-find fish fzf nano neovim ripgrep tmux zoxide zsh thefuck direnv
+    apt-get install bat eza fd-find fish fzf nano neovim ripgrep tmux zoxide zsh thefuck direnv
     rm -rf /var/lib/apt/lists/*
 EOF
 
