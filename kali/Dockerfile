@@ -226,6 +226,15 @@ RUN <<-EOF
     apt-get install git-secret
 EOF
 
+RUN <<-EOF
+    apt-get autoremove -y
+    apt-get clean -y
+    rm -rf \
+        /tmp/* \
+        /var/lib/apt/lists/* \
+        /var/tmp/*
+EOF
+
 SHELL ["/bin/sh", "-c"]
 
 ENV STEAMPIPE_UPDATE_CHECK=false
