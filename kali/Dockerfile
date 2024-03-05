@@ -93,6 +93,7 @@ EOF
 RUN <<-EOF
     apt-get update
     apt-get install pipx
+    pipx install semgrep-search
     pipx install azure-cli
     pipx install frida-tools
     pipx install mobsfscan
