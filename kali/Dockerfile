@@ -16,6 +16,15 @@ RUN <<-EOF
     rm -rf /var/lib/apt/lists/*
 EOF
 
+# Install peirates
+RUN <<-EOF
+    wget https://github.com/inguardians/peirates/releases/download/v1.1.16/peirates-linux-amd64.tar.xz -O /tmp/peirates.tar.xz && \
+    tar -xJf /tmp/peirates.tar.xz -C /tmp && \
+    mv /tmp/peirates-linux-amd64 /usr/local/bin/peirates && \
+    chmod +x /usr/local/bin/peirates && \
+    rm /tmp/peirates.tar.xz
+EOF
+
 # Install google-cloud-cli
 RUN <<-EOF
     curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
