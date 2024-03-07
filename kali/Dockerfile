@@ -12,7 +12,7 @@ RUN <<-EOF
     echo "APT::Get::Assume-Yes true;" > /etc/apt/apt.conf.d/90assumeyes
     apt-get update
     apt-get dist-upgrade
-    apt-get install gnupg curl wget git
+    apt-get install gnupg curl wget git xz-utils
     rm -rf /var/lib/apt/lists/*
 EOF
 
