@@ -18,10 +18,10 @@ EOF
 
 # Install peirates
 RUN <<-EOF
-    wget https://github.com/inguardians/peirates/releases/download/v1.1.16/peirates-linux-amd64.tar.xz -O /tmp/peirates.tar.xz && \
-    tar -xJf /tmp/peirates.tar.xz -C /tmp && \
-    mv /tmp/peirates-linux-amd64 /usr/local/bin/peirates && \
-    chmod +x /usr/local/bin/peirates && \
+    wget -q https://github.com/inguardians/peirates/releases/download/v1.1.16/peirates-linux-amd64.tar.xz -O /tmp/peirates.tar.xz
+    tar -xJf /tmp/peirates.tar.xz -C /tmp
+    mv /tmp/peirates-linux-amd64 /usr/local/bin/peirates
+    chmod +x /usr/local/bin/peirates
     rm /tmp/peirates.tar.xz
 EOF
 
@@ -131,7 +131,7 @@ EOF
 
 # Install .NET 6 SDK
 RUN <<-EOF
-    wget https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+    wget -q https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
     apt-get install dotnet-sdk-6.0
@@ -166,7 +166,7 @@ EOF
 RUN <<-EOF
     apt-get update
     VERSION=$(curl -s https://jeremylong.github.io/DependencyCheck/current.txt)
-    wget "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" -O /tmp/dependency-check.zip
+    wget -q "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" -O /tmp/dependency-check.zip
     unzip /tmp/dependency-check.zip -d /usr/share/
     rm /tmp/dependency-check.zip
     rm -rf /var/lib/apt/lists/*
@@ -175,7 +175,7 @@ EOF
 # Install jwt_tool
 RUN <<-EOF
     apt-get update
-    wget https://github.com/ticarpi/jwt_tool/archive/refs/heads/master.zip -O /tmp/jwt_tool.zip
+    wget -q https://github.com/ticarpi/jwt_tool/archive/refs/heads/master.zip -O /tmp/jwt_tool.zip
     unzip /tmp/jwt_tool.zip -d /usr/share/
     rm /tmp/jwt_tool.zip
     mv /usr/share/jwt_tool-master /usr/share/jwt_tool
@@ -188,7 +188,7 @@ EOF
 RUN <<-EOF
     dotnet tool install dotnet-sonarscanner --tool-path /usr/local/bin
     cd /tmp
-    wget "https://search.maven.org/remote_content?g=org.sonarsource.scanner.cli&a=sonar-scanner-cli&v=LATEST&c=linux&e=zip" -O sonar-scanner-cli.zip
+    wget -q "https://search.maven.org/remote_content?g=org.sonarsource.scanner.cli&a=sonar-scanner-cli&v=LATEST&c=linux&e=zip" -O sonar-scanner-cli.zip
     unzip sonar-scanner-cli.zip
     rm sonar-scanner-cli.zip
     mv sonar-scanner-*-linux /opt/sonar-scanner
