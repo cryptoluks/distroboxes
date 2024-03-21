@@ -16,9 +16,18 @@ RUN <<-EOF
     rm -rf /var/lib/apt/lists/*
 EOF
 
+# Install cloudfoundry-cli
+RUN <<-EOF
+    curl -fsSL https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | gpg --dearmor -o /usr/share/keyrings/cloudfoundry.gpg
+    echo 'deb [signed-by=/usr/share/keyrings/cloudfoundry.gpg] https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+    apt-get update
+    apt-get install cf8-cli
+    rm -rf /var/lib/apt/lists/*
+EOF
+
 # Install peirates
 RUN <<-EOF
-    wget -q https://github.com/inguardians/peirates/releases/download/v1.1.16/peirates-linux-amd64.tar.xz -O /tmp/peirates.tar.xz
+    curl -fsSL https://github.com/inguardians/peirates/releases/download/v1.1.16/peirates-linux-amd64.tar.xz -O /tmp/peirates.tar.xz
     tar -xJf /tmp/peirates.tar.xz -C /tmp
     mv /tmp/peirates-linux-amd64 /usr/local/bin/peirates
     chmod +x /usr/local/bin/peirates
@@ -36,9 +45,8 @@ EOF
 
 # Install kubectl
 RUN <<-EOF
-    apt-get update
-    curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-    echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list
+    curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | gpg --dearmor -o /usr/share/keyrings/k8s.gpg
+    echo 'deb [signed-by=/usr/share/keyrings/k8s.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list
     apt-get update
     apt-get install kubectl
     rm -rf /var/lib/apt/lists/*
