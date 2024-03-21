@@ -27,7 +27,7 @@ EOF
 
 # Install peirates
 RUN <<-EOF
-    curl -fsSL https://github.com/inguardians/peirates/releases/download/v1.1.16/peirates-linux-amd64.tar.xz -O /tmp/peirates.tar.xz
+    wget -q https://github.com/inguardians/peirates/releases/download/v1.1.16/peirates-linux-amd64.tar.xz -O /tmp/peirates.tar.xz
     tar -xJf /tmp/peirates.tar.xz -C /tmp
     mv /tmp/peirates-linux-amd64 /usr/local/bin/peirates
     chmod +x /usr/local/bin/peirates
