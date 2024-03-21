@@ -19,7 +19,7 @@ EOF
 # Install cloudfoundry-cli
 RUN <<-EOF
     curl -fsSL https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | gpg --dearmor -o /usr/share/keyrings/cloudfoundry.gpg
-    echo 'deb [signed-by=/usr/share/keyrings/cloudfoundry.gpg] https://packages.cloudfoundry.org/debian stable main" | tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+    echo 'deb [signed-by=/usr/share/keyrings/cloudfoundry.gpg] https://packages.cloudfoundry.org/debian stable main' | tee /etc/apt/sources.list.d/cloudfoundry-cli.list
     apt-get update
     apt-get install cf8-cli
     rm -rf /var/lib/apt/lists/*
