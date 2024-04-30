@@ -1,0 +1,39 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 6"
+  push:
+    paths:
+      - deck-arch/**
+
+env:
+  REGISTRY: ghcr.io
+  DST: ghcr.io/${{ github.repository }}/deck-arch:latest
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deck-arch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to ${{ env.REGISTRY }} as ${{ github.actor }}
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Clone repository
+        uses: actions/checkout@v4
+      - name: Set up docker buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and push the image to ${{ env.DST }}
+        uses: docker/build-push-action@v5
+        with:
+          context: deck-arch
+          push: true
+          tags: ${{ env.DST }}
+          platforms: linux/amd64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
