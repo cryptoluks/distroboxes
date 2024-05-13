@@ -156,10 +156,9 @@ EOF
 RUN <<-EOF
     apt-get update
     VERSION=$(curl -s https://jeremylong.github.io/DependencyCheck/current.txt)
-    wget "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" -O /tmp/dependency-check.zip
+    wget -q "https://github.com/jeremylong/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" -O /tmp/dependency-check.zip
     unzip /tmp/dependency-check.zip -d /usr/share/
     rm /tmp/dependency-check.zip
-    chmod +x /usr/local/bin/dependency-check
     rm -rf /var/lib/apt/lists/*
 EOF
 
@@ -179,7 +178,7 @@ EOF
 RUN <<-EOF
     dotnet tool install dotnet-sonarscanner --tool-path /usr/local/bin
     cd /tmp
-    wget "https://search.maven.org/remote_content?g=org.sonarsource.scanner.cli&a=sonar-scanner-cli&v=LATEST&c=linux&e=zip" -O sonar-scanner-cli.zip
+    wget -q "https://search.maven.org/remote_content?g=org.sonarsource.scanner.cli&a=sonar-scanner-cli&v=LATEST&c=linux&e=zip" -O sonar-scanner-cli.zip
     unzip sonar-scanner-cli.zip
     rm sonar-scanner-cli.zip
     mv sonar-scanner-*-linux /opt/sonar-scanner
